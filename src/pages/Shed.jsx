@@ -15,10 +15,18 @@ function AddListingModal({ onClose }) {
     if (!form.crop || !form.quantity || !form.best_by) { notify('Fill in crop name, quantity, and best-by date.', 'warning'); return; }
     const tier = TIER_INFO[form.tier];
     const listing = {
-      ...form, tier: +form.tier, credits: tier.credits, quantity: +form.quantity,
-      photo_color: '#4A8A3A', photo_emoji: '🌿',
-      status: 'in_season', high_demand: false,
-      location: 'Park Point', distance: 0,
+      crop:        form.crop,
+      variety:     form.variety || null,
+      category:    form.category,
+      credit_tier: String(form.tier),
+      credits:     tier.credits,
+      quantity:    +form.quantity,
+      unit:        form.unit,
+      description: form.description || null,
+      best_by:     form.best_by || null,
+      surplus:     form.surplus,
+      status:      'in_season',
+      high_demand: false,
     };
     addListing(listing);
     onClose();

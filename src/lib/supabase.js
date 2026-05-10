@@ -73,7 +73,7 @@ export async function updateProfile(userId, updates) {
 
 // ── Listings ──────────────────────────────────────────────────────────────────
 
-export async function getListings({ radiusMiles = 10, category, tier, search } = {}) {
+export async function getListings({ category, tier, search } = {}) {
   let query = supabase
     .from('listing_feed')
     .select('*')
@@ -85,7 +85,7 @@ export async function getListings({ radiusMiles = 10, category, tier, search } =
 
   const { data, error } = await query;
   if (error) throw error;
-  return data;
+  return data ?? [];
 }
 
 export async function createListing(listing) {

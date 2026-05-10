@@ -7,6 +7,8 @@ import Stand from './pages/Stand';
 import Shed from './pages/Shed';
 import Ledger from './pages/Ledger';
 import Profile from './pages/Profile';
+import About from './pages/About';
+import Chat from './pages/Chat';
 import Auth from './pages/Auth';
 import { MapPage, Groups, Admin } from './pages/OtherPages';
 import { supabase } from './lib/supabase';
@@ -22,7 +24,9 @@ function Layout() {
           <Route path="/shed"    element={<Shed />} />
           <Route path="/ledger"  element={<Ledger />} />
           <Route path="/groups"  element={<Groups />} />
+          <Route path="/chat"    element={<Chat />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/about"   element={<About />} />
           <Route path="/admin"   element={<Admin />} />
         </Routes>
       </main>
@@ -32,7 +36,7 @@ function Layout() {
 }
 
 export default function App() {
-  const [session, setSession] = useState(undefined); // undefined = loading
+  const [session, setSession] = useState(undefined);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => setSession(session));
@@ -42,7 +46,6 @@ export default function App() {
     return () => subscription.unsubscribe();
   }, []);
 
-  // Loading state
   if (session === undefined) {
     return (
       <div className="min-h-screen bg-cream flex items-center justify-center">
@@ -51,12 +54,10 @@ export default function App() {
     );
   }
 
-  // Not logged in — show auth page
   if (!session) {
     return <Auth onAuth={() => supabase.auth.getSession().then(({ data }) => setSession(data.session))} />;
   }
 
-  // Logged in — show app
   return (
     <BrowserRouter>
       <AppProvider session={session}>
