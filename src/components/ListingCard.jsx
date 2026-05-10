@@ -73,7 +73,7 @@ export function ListingCard({ listing, view = 'grid' }) {
   const { user, wishlists, toggleWishlist } = useApp();
   const [showTrade, setShowTrade] = useState(false);
   const isWishlisted = wishlists.includes(listing.crop);
-  const isOwn = listing.user_id === user.id;
+  const isOwn = listing.user_id === user?.id;
 
   if (view === 'list') {
     return (
@@ -89,7 +89,7 @@ export function ListingCard({ listing, view = 'grid' }) {
               <CreditBadge amount={listing.credits} size="sm" />
             </div>
             <div className="flex items-center gap-3 mt-1.5 flex-wrap">
-              <TierBadge tier={listing.tier} />
+              <TierBadge tier={parseInt(listing.credit_tier || listing.tier)} />
               <FreshnessDot bestBy={listing.best_by} />
               <span className="text-xs text-stone-400 flex items-center gap-1"><MapPin size={10} />{listing.distance} mi</span>
               {listing.high_demand && <span className="tag tag-demand flex items-center gap-1"><Flame size={10} /> High Demand</span>}
@@ -122,7 +122,7 @@ export function ListingCard({ listing, view = 'grid' }) {
         </div>
 
         <div className="flex flex-wrap gap-1.5 items-center">
-          <TierBadge tier={listing.tier} />
+          <TierBadge tier={parseInt(listing.credit_tier || listing.tier)} />
           <FreshnessDot bestBy={listing.best_by} />
           {listing.surplus && <span className="tag bg-soil-50 text-soil-600 border border-soil-100">Take It All</span>}
           {listing.high_demand && <span className="tag tag-demand flex items-center gap-1"><Flame size={10} /> Demand</span>}
@@ -132,7 +132,7 @@ export function ListingCard({ listing, view = 'grid' }) {
           <div>
             <div className="flex items-center gap-1 text-xs text-stone-500">
               <span className="font-medium text-stone-700">{listing.user_name}</span>
-              <TrustPill tier={listing.user_tier} />
+              <TrustPill tier={listing.grower_tier || listing.user_tier} />
             </div>
             <div className="flex items-center gap-1 text-xs text-stone-400 mt-0.5">
               <MapPin size={10} />{listing.distance} mi · {listing.quantity} {listing.unit}
