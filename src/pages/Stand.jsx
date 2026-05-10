@@ -72,7 +72,7 @@ export default function Stand() {
 
       <SectionHeader
         title="Duluth Collective Stand"
-        subtitle="What's growing near you"
+        subtitle="See what is growing near you"
         action={
           <div className="flex items-center gap-2">
             <button onClick={() => setView(v => v === 'grid' ? 'list' : 'grid')} className="btn-ghost p-2">

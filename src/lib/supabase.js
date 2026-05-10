@@ -28,7 +28,7 @@ export async function signUp({ email, password, displayName, locationLabel }) {
   if (error) throw error;
 
   // Profile is created automatically via auth trigger on auth.users
-  // No manual insert needed — welcome grant fires from the profiles trigger
+  // No manual insert needed   welcome grant fires from the profiles trigger
   return data;
 }
 

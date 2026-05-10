@@ -102,7 +102,7 @@ export function Groups() {
       {/* Community Bin */}
       <div className="card p-4 mb-5">
         <div className="font-medium text-stone-800 mb-1">Community Bin</div>
-        <p className="text-xs text-stone-400 mb-3 leading-relaxed">Surplus donated for free. Anyone can claim. Credits come from the Community Reserve — backed by member generosity, not thin air.</p>
+        <p className="text-xs text-stone-400 mb-3 leading-relaxed">Surplus donated for free. Anyone can claim. Credits come from the Community Reserve   backed by member generosity, not thin air.</p>
         <ReserveBar balance={reserve.balance} donated={reserve.total_donated} />
         <div className="flex flex-col gap-2 mt-4">
           {communityBin.length === 0 ? (
@@ -142,7 +142,7 @@ export function Admin() {
         </div>
         <div>
           <h1 className="font-display text-2xl text-stone-800">Steward Dashboard</h1>
-          <p className="text-xs text-stone-400 italic">Oversight of the collective reciprocity.</p>
+          <p className="text-xs text-stone-400 italic">Community oversight and moderation.</p>
         </div>
       </div>
 

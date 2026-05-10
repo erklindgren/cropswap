@@ -6,7 +6,7 @@ import { Empty, TrustPill } from '../components/UI';
 import { SectionHeader } from '../components/UI';
 
 // Simple in-memory chat using Supabase Realtime broadcast
-// For production, add a messages table — this prototype uses broadcast channels
+// For production, add a messages table   this prototype uses broadcast channels
 
 function ChatWindow({ thread, currentUser, onBack }) {
   const [messages, setMessages] = useState([]);
@@ -80,7 +80,7 @@ function ChatWindow({ thread, currentUser, onBack }) {
 
       {/* Note about persistence */}
       <div className="text-xs text-stone-300 text-center mb-2">
-        Messages are session-only in this version — they don't persist after you leave.
+        Messages are session-only in this version   they don't persist after you leave.
       </div>
 
       {/* Input */}

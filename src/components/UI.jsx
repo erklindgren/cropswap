@@ -51,7 +51,7 @@ export function TrustPill({ tier }) {
   return <span className={`tag ${colors[tier] || colors.seedling}`}>{label}</span>;
 }
 
-// ── Modal via React Portal — fixes viewport clipping ─────────────────────────
+// ── Modal via React Portal   fixes viewport clipping ─────────────────────────
 export function Modal({ title, onClose, children, wide = false }) {
   return createPortal(
     <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4"

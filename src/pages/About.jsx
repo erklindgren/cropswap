@@ -9,12 +9,12 @@ const TRUST_TIERS = [
 ];
 
 const FAQ = [
-  { q:'What is a LETS system?', a:'LETS stands for Local Exchange Trading System — a community-run network where members exchange goods and services using a shared credit system instead of money. Every credit earned by one member is balanced by a credit owed by another, so the total always nets to zero. No money ever changes hands.' },
+  { q:'What is a LETS system?', a:'LETS stands for Local Exchange Trading System   a community-run network where members exchange goods and services using a shared credit system instead of money. Every credit earned by one member is balanced by a credit owed by another, so the total always nets to zero. No money ever changes hands.' },
   { q:'How do credits work?', a:'Credits are earned by giving produce and spent by receiving it. Tier 1 items (a bunch of carrots, a head of lettuce) are worth 10 credits. Tier 2 labor-intensive items (jams, dried herbs) are 20. Tier 3 rare or artisan items (honey, saffron, ferments) are 30. You can go up to -10 credits before needing to give first.' },
   { q:'What is the Community Reserve?', a:'The Reserve is a shared pool funded entirely by member donations. When you donate surplus to the Community Bin, the Reserve is credited. Those credits fund welcome grants for new members and moderator grants for members in need. Every credit in the Reserve was earned by real produce given by a real neighbor.' },
   { q:'What happens if I don\'t show up for a trade?', a:'If a confirmed trade expires without pickup, your credits are returned but a no-show flag is added to your profile. Three no-shows in 60 days suspends your listing privileges pending moderator review.' },
   { q:'How do I move up from Seedling?', a:'Simply trade. Each confirmed trade increments your trade count. At 5 trades you become a Grower, at 20 a Steward, and at 50 an Elder. Trust tiers upgrade automatically.' },
-  { q:'Can I donate to people in need?', a:'Yes — the Community Bin is specifically for this. Donate any surplus from your Shed for 0 credits. Anyone can claim from the Bin for free. Members can also privately self-flag as Needs Access to claim without public disclosure.' },
+  { q:'Can I donate to people in need?', a:'Yes   the Community Bin is specifically for this. Donate any surplus from your Shed for 0 credits. Anyone can claim from the Bin for free. Members can also privately self-flag as Needs Access to claim without public disclosure.' },
 ];
 
 function FAQItem({ q, a }) {
@@ -40,7 +40,7 @@ export default function About() {
           <Sprout size={28} className="text-white" />
         </div>
         <h1 className="font-display text-3xl text-stone-800 mb-3">Duluth Crop Swap</h1>
-        <p className="text-stone-500 leading-relaxed">A hyperlocal produce exchange built on mutual trust, not money. Share your garden surplus with neighbors and receive theirs in return — all tracked through a fair, community-owned credit system.</p>
+        <p className="text-stone-500 leading-relaxed">A hyperlocal produce exchange built on mutual trust, not money. Share your garden surplus with neighbors and receive theirs in return   all tracked through a fair, community-owned credit system.</p>
       </div>
 
       {/* How it works */}
@@ -51,7 +51,7 @@ export default function About() {
             { icon:Sprout, title:'List what you have', desc:'Add produce from your garden to the Stand. Set the tier, quantity, and best-by date. A photo helps.' },
             { icon:ArrowRightLeft, title:'Request a trade', desc:'See something you want? Send a trade request. Offer produce of equal credit value from your own garden.' },
             { icon:Shield, title:'Confirm at pickup', desc:'Meet up and scan the QR code to confirm the exchange. Credits transfer instantly and the ledger stays balanced.' },
-            { icon:Heart, title:'Build community', desc:'Your Stewardship Profile shows what you\'re growing all season — not just what\'s ready. Follow growers you trust.' },
+            { icon:Heart, title:'Build community', desc:'Your Stewardship Profile shows what you\'re growing all season   not just what\'s ready. Follow growers you trust.' },
           ].map(({ icon: Icon, title, desc }) => (
             <div key={title} className="flex gap-4 items-start">
               <div className="w-9 h-9 rounded-xl bg-moss-50 flex items-center justify-center flex-shrink-0">
@@ -71,8 +71,8 @@ export default function About() {
         <div className="font-medium text-moss-800 mb-2 flex items-center gap-2">
           <Star size={14} /> What is a LETS system?
         </div>
-        <p className="text-moss-700 text-sm leading-relaxed mb-3">LETS — Local Exchange Trading System — is a community-run credit network with a 40-year track record in communities worldwide. Unlike money, LETS credits can't be hoarded, don't earn interest, and don't leave the community. Every credit you earn is matched by a credit someone else owes, so the system always nets to zero.</p>
-        <p className="text-moss-700 text-sm leading-relaxed">Duluth Crop Swap enforces this at the database level — the zero-sum constraint is hardcoded, not just a policy. The Community Reserve, funded entirely by member generosity, provides welcome credits for new members and support for those in need.</p>
+        <p className="text-moss-700 text-sm leading-relaxed mb-3">LETS   Local Exchange Trading System   is a community-run credit network with a 40-year track record in communities worldwide. Unlike money, LETS credits can't be hoarded, don't earn interest, and don't leave the community. Every credit you earn is matched by a credit someone else owes, so the system always nets to zero.</p>
+        <p className="text-moss-700 text-sm leading-relaxed">Duluth Crop Swap enforces this at the database level   the zero-sum constraint is hardcoded, not just a policy. The Community Reserve, funded entirely by member generosity, provides welcome credits for new members and support for those in need.</p>
       </div>
 
       {/* Trust tiers */}
@@ -121,7 +121,7 @@ export default function About() {
         <div className="font-medium text-clay-800 mb-2 flex items-center gap-2">
           <Heart size={14} /> Community equity access
         </div>
-        <p className="text-clay-700 text-sm leading-relaxed">The Community Bin lets anyone donate surplus for free. Members in need can claim from it without spending credits. If you'd like to access the Bin, you can privately self-flag in your Profile settings — no public disclosure is made. Elders and Stewards can also issue discretionary credit grants from the Community Reserve to members facing barriers.</p>
+        <p className="text-clay-700 text-sm leading-relaxed">The Community Bin lets anyone donate surplus for free. Members in need can claim from it without spending credits. If you'd like to access the Bin, you can privately self-flag in your Profile settings   no public disclosure is made. Elders and Stewards can also issue discretionary credit grants from the Community Reserve to members facing barriers.</p>
       </div>
 
       {/* FAQ */}

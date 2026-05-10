@@ -73,7 +73,7 @@ export function AppProvider({ session, children }) {
         setStewardship(stewardData || []);
       } catch (err) {
         console.error('Bootstrap error:', err);
-        notify('Failed to load some data — refresh to retry.', 'warning');
+        notify('Failed to load some data   refresh to retry.', 'warning');
       } finally {
         setLoading(false);
       }

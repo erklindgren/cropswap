@@ -35,7 +35,7 @@ export default function Auth({ onAuth }) {
             <Sprout size={28} className="text-white" />
           </div>
           <h1 className="font-display text-3xl text-stone-800">Duluth <span className="text-moss-600">Crop Swap</span></h1>
-          <p className="text-stone-400 text-sm mt-1 italic">Share abundance. Grow community.</p>
+          <p className="text-stone-400 text-sm mt-1 italic">Share your garden. Build your community.</p>
         </div>
 
         <div className="card p-6">
@@ -76,7 +76,7 @@ export default function Auth({ onAuth }) {
 
             {mode === 'signup' && (
               <div className="bg-moss-50 border border-moss-100 rounded-xl p-3 text-xs text-moss-700 leading-relaxed">
-                New members receive 10 welcome credits from the Community Reserve — enough to make your first trade before you've given anything.
+                New members receive 10 welcome credits from the Community Reserve   enough to make your first trade before you've given anything.
               </div>
             )}
 

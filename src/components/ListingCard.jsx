@@ -22,7 +22,7 @@ function TradeModal({ listing, onClose }) {
       <div className="bg-stone-50 rounded-2xl p-4 mb-4 flex items-center gap-3">
         <CropPhoto listing={listing} size="sm" />
         <div>
-          <div className="font-medium text-stone-800">{listing.variety ? `${listing.crop} — ${listing.variety}` : listing.crop}</div>
+          <div className="font-medium text-stone-800">{listing.variety ? `${listing.crop}   ${listing.variety}` : listing.crop}</div>
           <div className="text-stone-500 text-sm">{listing.quantity} {listing.unit} · {listing.grower_name || listing.user_name}</div>
           <div className="mt-1"><CreditBadge amount={listing.credits} size="sm" /></div>
         </div>

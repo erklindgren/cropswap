@@ -90,7 +90,7 @@ export default function Ledger() {
             ['Season trades',     stats.trades_this_season],
           ].map(([k, v]) => (
             <div key={k} className="text-center p-3 bg-stone-50 rounded-xl">
-              <div className="font-mono text-xl font-medium text-stone-800">{v ?? '—'}</div>
+              <div className="font-mono text-xl font-medium text-stone-800">{v ?? ' '}</div>
               <div className="text-xs text-stone-400">{k}</div>
             </div>
           ))}

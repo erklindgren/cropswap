@@ -18,7 +18,7 @@ export const CURRENT_USER = {
   stewardship: [
     { crop: 'Mortgage Lifter Tomatoes', method: 'No-Till', status: 'growing', notes: 'Third-generation seed stock from northern Wisconsin.' },
     { crop: 'Garlic (Music variety)', method: 'Organic', status: 'coming_soon', notes: 'Planting in fall, harvest late July.' },
-    { crop: 'Lemon Balm', method: 'Permaculture', status: 'in_season', notes: 'Aggressive spreader — happy to share divisions.' },
+    { crop: 'Lemon Balm', method: 'Permaculture', status: 'in_season', notes: 'Aggressive spreader   happy to share divisions.' },
   ],
   badges: ['generous_grower', 'verified_grower'],
 };
@@ -148,7 +148,7 @@ export const TRADE_REQUESTS = [
     from_user: 'Erik Lindgren', to_user: 'Priya Nair',
     offer: '2 bunches Lemon Balm (20 Credits)',
     want: '1 jar Raspberry Jam (20 Credits)',
-    message: 'Would love to try your jam — I have fresh lemon balm to offer.',
+    message: 'Would love to try your jam   I have fresh lemon balm to offer.',
     created: daysAgo(1),
   },
 ];
