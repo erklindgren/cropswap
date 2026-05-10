@@ -51,12 +51,28 @@ export function AppProvider({ session, children }) {
           getStewardship(uid),
         ]);
 
-        setUser({
-          ...profile,
-          credits: profile.credit_balances?.balance ?? 0,
-          lifetime_given: profile.credit_balances?.lifetime_given ?? 0,
-          lifetime_received: profile.credit_balances?.lifetime_received ?? 0,
-        });
+        if (!profile) {
+          // Profile row not yet created — trigger may be delayed
+          // Show minimal shell so app doesn't crash
+          setUser({
+            id: session.user.id,
+            display_name: session.user.email?.split('@')[0] || 'Member',
+            trust_tier: 'seedling',
+            credits: 0,
+            lifetime_given: 0,
+            lifetime_received: 0,
+            is_admin: false,
+            trade_count: 0,
+            joined_at: new Date().toISOString(),
+          });
+        } else {
+          setUser({
+            ...profile,
+            credits: profile.credit_balances?.balance ?? 0,
+            lifetime_given: profile.credit_balances?.lifetime_given ?? 0,
+            lifetime_received: profile.credit_balances?.lifetime_received ?? 0,
+          });
+        }
         setListings(listingData || []);
         setTxns(ledgerData || []);
         setTrades(tradeData || []);

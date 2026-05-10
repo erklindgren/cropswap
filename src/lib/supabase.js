@@ -55,7 +55,9 @@ export async function getProfile(userId) {
     .from('profiles')
     .select('*, credit_balances(*)')
     .eq('id', userId)
-    .single();
+    .maybeSingle();
+  // If no profile exists yet, return a minimal shell —
+  // the on_profile_created trigger may still be running
   if (error) throw error;
   return data;
 }
