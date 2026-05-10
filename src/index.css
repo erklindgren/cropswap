@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; }
+  body { background-color: #FAF8F3; color: #1C1812; font-family: 'DM Sans', system-ui, sans-serif; }
+  ::selection { background: #CCDFB0; color: #1F4610; }
+}
+
+@layer components {
+  .btn-primary { @apply bg-moss-600 hover:bg-moss-700 text-white font-medium px-5 py-2.5 rounded-xl transition-all duration-150 shadow-sm active:scale-95 cursor-pointer; }
+  .btn-secondary { @apply bg-cream hover:bg-soil-50 text-stone-700 font-medium px-5 py-2.5 rounded-xl border border-stone-200 transition-all duration-150 active:scale-95 cursor-pointer; }
+  .btn-ghost { @apply text-stone-500 hover:text-stone-800 hover:bg-stone-100 font-medium px-4 py-2 rounded-lg transition-all duration-150 active:scale-95 cursor-pointer; }
+  .card { @apply bg-white rounded-2xl border border-stone-100; box-shadow: 0 1px 3px rgba(30,18,5,0.08), 0 4px 16px rgba(30,18,5,0.06); }
+  .input { @apply w-full bg-parchment border border-stone-200 rounded-xl px-4 py-2.5 text-stone-800 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-moss-400 focus:border-transparent transition-all duration-150; }
+  .tag { @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium; }
+  .tag-t1 { @apply bg-moss-50 text-moss-700 border border-moss-100; }
+  .tag-t2 { @apply bg-soil-50 text-soil-600 border border-soil-100; }
+  .tag-t3 { @apply bg-clay-50 text-clay-600 border border-clay-100; }
+  .tag-demand { @apply bg-clay-50 text-clay-600; }
+  .nav-link { @apply flex flex-col items-center gap-0.5 px-3 py-2 rounded-xl text-stone-400 hover:text-moss-600 hover:bg-moss-50 transition-all duration-150 cursor-pointer text-xs; }
+  .nav-link-active { @apply text-moss-700 bg-moss-50; }
+}
+
+body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events:none; z-index:9998; }
+
+.page-enter { animation: fadeUp 0.2s ease both; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:#D4CFC3; border-radius:3px; }
