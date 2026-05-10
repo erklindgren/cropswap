@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom';
 import { useApp } from '../context/AppContext';
 import { CheckCircle, AlertTriangle, Info, X } from 'lucide-react';
 
@@ -36,8 +37,9 @@ export function FreshnessDot({ bestBy }) {
   const days = Math.ceil((new Date(bestBy) - new Date()) / 86400000);
   const color = days > 5 ? 'bg-moss-400' : days > 2 ? 'bg-yellow-400' : 'bg-red-400';
   const label = days <= 0 ? 'Today' : `${days}d`;
+  const fullDate = new Date(bestBy).toLocaleDateString('en-US', { month:'short', day:'numeric' });
   return (
-    <span className="inline-flex items-center gap-1.5 text-xs text-stone-500">
+    <span className="inline-flex items-center gap-1.5 text-xs text-stone-500" title={`Best by ${fullDate}`}>
       <span className={`w-2 h-2 rounded-full ${color}`} />{label}
     </span>
   );
@@ -49,19 +51,42 @@ export function TrustPill({ tier }) {
   return <span className={`tag ${colors[tier] || colors.seedling}`}>{label}</span>;
 }
 
+// ── Modal via React Portal — fixes viewport clipping ─────────────────────────
 export function Modal({ title, onClose, children, wide = false }) {
-  return (
-    <div className="fixed inset-0 z-40 flex items-center justify-center p-4" style={{ animation:'fadeUp 0.15s ease both' }}>
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+      style={{ animation:'fadeUp 0.15s ease both' }}>
       <div className="absolute inset-0 bg-stone-900/40 backdrop-blur-sm" onClick={onClose} />
-      <div className={`relative bg-white rounded-3xl shadow-lift w-full ${wide ? 'max-w-2xl' : 'max-w-lg'} overflow-hidden`}
-        style={{ maxHeight:'90vh', display:'flex', flexDirection:'column' }}>
+      <div className={`relative bg-white rounded-3xl shadow-lift w-full ${wide ? 'max-w-2xl' : 'max-w-lg'} flex flex-col`}
+        style={{ maxHeight:'90vh' }}>
         <div className="flex items-center justify-between px-5 py-4 border-b border-stone-100 flex-shrink-0">
           <h2 className="font-display text-xl text-stone-800">{title}</h2>
-          <button onClick={onClose} className="btn-ghost p-2"><X size={18} /></button>
+          <button onClick={onClose} className="btn-ghost p-2 flex-shrink-0"><X size={18} /></button>
         </div>
         <div className="overflow-y-auto flex-1 p-5">{children}</div>
       </div>
-    </div>
+    </div>,
+    document.body
+  );
+}
+
+export function ConfirmModal({ title, message, confirmLabel = 'Confirm', onConfirm, onClose, danger = false }) {
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-stone-900/40 backdrop-blur-sm" onClick={onClose} />
+      <div className="relative bg-white rounded-3xl shadow-lift w-full max-w-sm p-6">
+        <h2 className="font-display text-xl text-stone-800 mb-2">{title}</h2>
+        <p className="text-stone-500 text-sm mb-5 leading-relaxed">{message}</p>
+        <div className="flex gap-3">
+          <button onClick={onClose} className="btn-secondary flex-1">Cancel</button>
+          <button onClick={() => { onConfirm(); onClose(); }}
+            className={`flex-1 px-5 py-2.5 rounded-xl font-medium transition-all active:scale-95 ${danger ? 'bg-clay-600 hover:bg-clay-700 text-white' : 'btn-primary'}`}>
+            {confirmLabel}
+          </button>
+        </div>
+      </div>
+    </div>,
+    document.body
   );
 }
 
@@ -109,6 +134,42 @@ export function ReserveBar({ balance, donated }) {
       <div className="h-2 bg-stone-100 rounded-full overflow-hidden">
         <div className={`h-full rounded-full transition-all duration-700 ${color}`} style={{ width:`${pct}%` }} />
       </div>
+    </div>
+  );
+}
+
+// ── Crop emoji helper ─────────────────────────────────────────────────────────
+export function getCropEmoji(cropName) {
+  const map = {
+    tomato:'🍅', cherry:'🍅', zucchini:'🥒', pepper:'🌶️', corn:'🌽',
+    squash:'🎃', pumpkin:'🎃', bean:'🫘', carrot:'🥕', lettuce:'🥬',
+    kale:'🥬', herb:'🌿', basil:'🌿', mint:'🌿', garlic:'🧄', onion:'🧅',
+    strawberry:'🍓', raspberry:'🍓', berry:'🫐', blueberry:'🫐', apple:'🍎',
+    potato:'🥔', cucumber:'🥒', beet:'🫚', chard:'🥬', spinach:'🥬',
+    pea:'🫛', honey:'🍯', jam:'🍯', chamomile:'🌼', lavender:'💜',
+    sunflower:'🌻', seed:'🌱', flower:'🌸',
+  };
+  const lower = (cropName || '').toLowerCase();
+  return Object.entries(map).find(([k]) => lower.includes(k))?.[1] ?? '🌱';
+}
+
+// ── Crop photo with emoji fallback ────────────────────────────────────────────
+export function CropPhoto({ listing, size = 'md' }) {
+  const sizes = { sm:'w-14 h-14 text-2xl', md:'w-20 h-20 text-3xl', lg:'w-28 h-28 text-4xl' };
+  const emoji = listing?.photo_emoji || getCropEmoji(listing?.crop);
+  const color = listing?.photo_color || '#4A8A3A';
+
+  if (listing?.photo_urls?.[0]) {
+    return (
+      <div className={`${sizes[size]} rounded-xl overflow-hidden flex-shrink-0`}>
+        <img src={listing.photo_urls[0]} alt={listing.crop} className="w-full h-full object-cover" />
+      </div>
+    );
+  }
+  return (
+    <div className={`${sizes[size]} rounded-xl flex items-center justify-center flex-shrink-0`}
+      style={{ backgroundColor: color + '18', border:`1px solid ${color}28` }}>
+      <span>{emoji}</span>
     </div>
   );
 }

@@ -24,8 +24,8 @@ export default function Nav() {
             <div className="w-8 h-8 rounded-xl bg-moss-600 flex items-center justify-center shadow-sm group-hover:bg-moss-700 transition-colors">
               <Sprout size={16} className="text-white" />
             </div>
-            <span className="font-display text-lg text-stone-800 tracking-tight">
-              Duluth <span className="text-moss-600">Crop Swap</span>
+            <span className="font-display text-lg text-stone-800 tracking-tight whitespace-nowrap">
+              <span className="hidden sm:inline">Duluth </span><span className="text-moss-600">Crop Swap</span>
             </span>
           </button>
 

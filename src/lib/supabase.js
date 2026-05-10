@@ -253,7 +253,7 @@ export async function getCommunityBin() {
     .is('claimed_by', null)
     .order('created_at', { ascending: false });
   if (error) throw error;
-  return data;
+  return data ?? [];
 }
 
 export async function donateToBin({ listingId, crop, quantity, tier }) {

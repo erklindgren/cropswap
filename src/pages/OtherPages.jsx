@@ -1,7 +1,6 @@
 import { MapPin, Users, Flame, Bell, BellOff, ShieldCheck, AlertTriangle, CheckCircle } from 'lucide-react';
 import { SectionHeader, Empty, StatCard, ReserveBar } from '../components/UI';
 import { useApp } from '../context/AppContext';
-import { WISHLISTS, NETWORK_STATS } from '../lib/data';
 
 // ── Map page ──────────────────────────────────────────────────────────────────
 export function MapPage() {
@@ -66,7 +65,7 @@ export function MapPage() {
 
 // ── Groups / Community page ───────────────────────────────────────────────────
 export function Groups() {
-  const { wishlists, toggleWishlist, communityBin, claimFromBin, reserve } = useApp();
+  const { wishlists, toggleWishlist, communityBin, claimFromBin, reserve, wishlistDemand } = useApp();
 
   return (
     <div className="page-enter">
@@ -79,9 +78,9 @@ export function Groups() {
         </div>
         <p className="text-xs text-stone-400 mb-4">Follow crops to signal demand to growers. When 10+ people want something and no one's listed it, it shows as High Demand.</p>
         <div className="flex flex-col gap-2">
-          {WISHLISTS.map(w => {
+          {(wishlistDemand || []).map(w => {
             const isFollowing = wishlists.includes(w.crop);
-            const isHighDemand = w.listings === 0 && w.followers >= 5;
+            const isHighDemand = w.active_listing_count === 0 && w.follower_count >= 5;
             return (
               <div key={w.crop} className={`flex items-center justify-between p-3 rounded-xl border ${isHighDemand ? 'bg-clay-50 border-clay-100' : 'bg-stone-50 border-stone-100'}`}>
                 <div>
@@ -89,7 +88,7 @@ export function Groups() {
                     {w.crop}
                     {isHighDemand && <span className="tag tag-demand text-xs flex items-center gap-1"><Flame size={10} /> High Demand</span>}
                   </div>
-                  <div className="text-xs text-stone-400 mt-0.5">{w.followers} following · {w.listings} active listing{w.listings !== 1 ? 's' : ''}</div>
+                  <div className="text-xs text-stone-400 mt-0.5">{w.follower_count} following · {w.active_listing_count} active listing{w.active_listing_count !== 1 ? 's' : ''}</div>
                 </div>
                 <button onClick={() => toggleWishlist(w.crop)} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${isFollowing ? 'bg-moss-100 text-moss-700 hover:bg-moss-200' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'}`}>
                   {isFollowing ? <><BellOff size={12} /> Unfollow</> : <><Bell size={12} /> Follow</>}
@@ -109,7 +108,7 @@ export function Groups() {
           {communityBin.length === 0 ? (
             <Empty emoji="🧺" title="Bin is empty" body="Donate surplus from your Shed to replenish it." />
           ) : (
-            (communityBin || []).filter(Boolean).map(item => (
+            (communityBin || []).map(item => item && (
               <div key={item.id} className="flex items-center justify-between p-3 bg-stone-50 rounded-xl border border-stone-100">
                 <div>
                   <div className="text-sm font-medium text-stone-800">{item.crop}</div>
