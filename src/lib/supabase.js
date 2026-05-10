@@ -27,15 +27,7 @@ export async function signUp({ email, password, displayName, locationLabel }) {
   });
   if (error) throw error;
 
-  // Create profile row — welcome grant fires automatically via DB trigger
-  if (data.user) {
-    const { error: profileError } = await supabase.from('profiles').insert({
-      id:             data.user.id,
-      display_name:   displayName,
-      location_label: locationLabel,
-    });
-    if (profileError) throw profileError;
-  }
+  // Profile created automatically via auth trigger — no manual insert needed
   return data;
 }
 
