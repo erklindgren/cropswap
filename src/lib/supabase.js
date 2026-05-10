@@ -249,7 +249,7 @@ export async function getWishlistDemand() {
 export async function getCommunityBin() {
   const { data, error } = await supabase
     .from('community_bin')
-    .select('*, profiles(display_name)')
+    .select('*, profiles!community_bin_donor_id_fkey(display_name)')
     .is('claimed_by', null)
     .order('created_at', { ascending: false });
   if (error) throw error;

@@ -109,11 +109,11 @@ export function Groups() {
           {communityBin.length === 0 ? (
             <Empty emoji="🧺" title="Bin is empty" body="Donate surplus from your Shed to replenish it." />
           ) : (
-            communityBin.map(item => (
+            (communityBin || []).filter(Boolean).map(item => (
               <div key={item.id} className="flex items-center justify-between p-3 bg-stone-50 rounded-xl border border-stone-100">
                 <div>
                   <div className="text-sm font-medium text-stone-800">{item.crop}</div>
-                  <div className="text-xs text-stone-400">{item.quantity} · from {item.donor}</div>
+                  <div className="text-xs text-stone-400">{item.quantity} · from {item.profiles?.display_name || item.donor}</div>
                 </div>
                 <button onClick={() => claimFromBin(item)} className="btn-primary text-xs px-3 py-1.5">Claim</button>
               </div>
