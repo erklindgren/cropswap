@@ -22,7 +22,7 @@ function AboutPanel({ onBack }) {
           Every summer, Duluth gardens produce more than any one household can eat. Zucchini overtakes the counter. Tomatoes ripen faster than you can use them. Meanwhile, a neighbor two blocks over is wishing they had fresh garlic or a jar of honey.
         </p>
         <p className="text-stone-700 leading-relaxed">
-          Crop Swap is a simple way to fix that. Share what you grow. Receive what you need. No money changes hands — just neighbors trading abundance through a fair credit system that has been proven in communities worldwide for over 40 years.
+          Crop Swap is a simple way to fix that. Share what you grow. Receive what you need. No money changes hands. Just neighbors trading abundance through a fair credit system proven in communities worldwide for over 40 years.
         </p>
       </div>
 
@@ -46,7 +46,7 @@ function AboutPanel({ onBack }) {
 
       <div className="bg-moss-50 border border-moss-100 rounded-2xl p-4 mb-6 text-center">
         <div className="text-moss-800 font-medium text-sm mb-1">Free to join. Always.</div>
-        <div className="text-moss-700 text-xs leading-relaxed">New members receive 10 welcome credits from the Community Reserve — enough to make your first trade before you have given anything.</div>
+        <div className="text-moss-700 text-xs leading-relaxed">New members receive 10 welcome credits from the Community Reserve, enough to make your first trade before you have given a thing.</div>
       </div>
 
       <button onClick={onBack}
