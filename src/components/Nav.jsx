@@ -14,7 +14,7 @@ const NAV = [
 export default function Nav() {
   const { pathname } = useLocation();
   const nav = useNavigate();
-  const { user } = useApp();
+  const { user, loading } = useApp();
 
   return (
     <>
@@ -35,17 +35,17 @@ export default function Nav() {
           <div className="flex items-center gap-2">
             {/* Credit balance pill */}
             <div className="hidden sm:flex items-center gap-1.5 bg-moss-50 border border-moss-100 rounded-full px-3 py-1.5">
-              <span className="font-mono text-sm font-medium text-moss-700">{user.credits}</span>
+              <span className="font-mono text-sm font-medium text-moss-700">{user?.credits ?? 0}</span>
               <span className="text-xs text-moss-500">credits</span>
             </div>
 
             {/* Trust tier indicator */}
             <div className="hidden sm:flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-stone-100 text-xs font-medium text-stone-600">
               <span className="w-1.5 h-1.5 rounded-full bg-moss-400 inline-block" />
-              {user.trust_tier}
+              {user?.trust_tier ?? "Seedling"}
             </div>
 
-            {user.is_admin && (
+            {user?.is_admin && (
               <button onClick={() => nav('/admin')} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${pathname === '/admin' ? 'bg-stone-800 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'}`}>
                 <ShieldCheck size={12} />
                 Admin
