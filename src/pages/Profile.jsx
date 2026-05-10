@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { Plus, Edit3, CheckCircle, MapPin, Award, Leaf, Calendar, LogOut, Camera } from 'lucide-react';
 import { SectionHeader, TrustPill, Modal, ConfirmModal, Empty } from '../components/UI';
+import { ShareTradeModal } from '../components/ShareTrade';
 import { useApp } from '../context/AppContext';
 import { signOut, updateProfile } from '../lib/supabase';
 import { TRUST_TIERS } from '../lib/data';
@@ -174,6 +175,7 @@ export default function Profile() {
   const [editProfile, setEditProfile]         = useState(false);
   const [editAvatar, setEditAvatar]           = useState(false);
   const [showSignOut, setShowSignOut]         = useState(false);
+  const [shareTarget, setShareTarget]         = useState(null);
 
   const myTier   = TRUST_TIERS.find(t => t.name?.toLowerCase() === user?.trust_tier) || TRUST_TIERS[0];
   const nextTier = TRUST_TIERS.find(t => t.level === myTier.level + 1);
@@ -316,6 +318,25 @@ export default function Profile() {
         </div>
       )}
 
+      {/* Confirmed trades with share */}
+      {(tradeRequests || []).filter(t => t.status === 'confirmed').length > 0 && (
+        <div className="card p-4 mb-5">
+          <div className="font-medium text-stone-800 mb-3">Completed Trades</div>
+          {(tradeRequests || []).filter(t => t.status === 'confirmed').map(t => (
+            <div key={t.id} className="border border-moss-100 bg-moss-50 rounded-xl p-3 mb-3 flex items-center justify-between">
+              <div>
+                <div className="text-sm font-medium text-moss-800">{t.offer_description}</div>
+                <div className="text-xs text-moss-600 mt-0.5">Trade confirmed</div>
+              </div>
+              <button onClick={() => setShareTarget(t)}
+                className="flex items-center gap-1.5 text-xs text-moss-700 hover:text-moss-900 font-medium transition-colors">
+                Share
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* Sign out */}
       <button onClick={() => setShowSignOut(true)} className="btn-secondary w-full flex items-center justify-center gap-2 text-stone-500">
         <LogOut size={15} /> Sign Out
@@ -324,6 +345,7 @@ export default function Profile() {
       {editStewardship && <StewardshipModal items={stewardship} onClose={() => setEditStewardship(false)} />}
       {editProfile     && <EditProfileModal user={user} onClose={() => setEditProfile(false)} />}
       {editAvatar      && <AvatarUpload user={user} onClose={() => setEditAvatar(false)} />}
+      {shareTarget && <ShareTradeModal trade={shareTarget} onClose={() => setShareTarget(null)} />}
       {showSignOut && (
         <ConfirmModal
           title="Sign out?"

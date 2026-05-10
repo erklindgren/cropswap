@@ -194,10 +194,14 @@ export default function Shed() {
 
   const deleteListing = async (listing) => {
     try {
-      await supabase.from('listings').delete().eq('id', listing.id);
+      const { error } = await supabase.from('listings').delete().eq('id', listing.id).eq('user_id', user?.id);
+      if (error) throw error;
       notify('Listing removed.');
-      setTimeout(() => window.location.reload(), 300);
-    } catch (err) { notify(err.message, 'warning'); }
+      setTimeout(() => window.location.reload(), 600);
+    } catch (err) {
+      console.error('Delete error:', err);
+      notify(err.message || 'Could not delete listing.', 'warning');
+    }
   };
 
   return (
